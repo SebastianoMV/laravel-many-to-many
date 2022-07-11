@@ -79,8 +79,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-
-        return view('admin.posts.edit', compact('post'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post','tags'));
     }
 
     /**
@@ -96,6 +96,12 @@ class PostController extends Controller
         $data['slug'] = Post::newSlug($data['title']);
 
         $post->update($data);
+
+        if(array_key_exists('tags', $data)){
+            $post->tags()->sync($data['tags']);
+        }else{
+            $post->tags()->sync([]);
+        }
 
         return redirect()->route('admin.posts.index', $post);
     }
