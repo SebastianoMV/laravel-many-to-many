@@ -13,6 +13,15 @@
               <p>
                 {{$post->content}}
               </p>
+              <div>
+                @forelse($post->tags as $tag)
+                  <span class="badge badge-info">{{$tag->name}}</span>
+                @empty
+                  
+                @endforelse
+
+              </div>
+              
               <div class="text-right"> 
                 <a class="btn btn-primary m-1" href="{{ route('admin.posts.index')}}">Back</a>
               </div>

@@ -26,22 +26,33 @@
                         <p>
                           {{$post->content}}
                         </p>
-                        <div class="text-right"> 
-                          <a class="btn btn-primary m-1" href="{{ route('admin.posts.show', $post)}}">Show</a>
-                          <a class="btn btn-primary m-1" href="{{ route('admin.posts.edit', $post)}}">Edit</a>
-                          <form 
-                          class="d-inline"
-                          action="{{ route('admin.posts.destroy', $post)}}" 
-                          method="POST"
-                          onsubmit="return confirm('Sicuro di vole eliminare?')">
-                          @csrf
-            
-                          @method('DELETE')
-            
-                            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-trash"></i></button>
-                          </form>
+                        <div class="d-flex justify-content-between">
+                          <span>
+                            Tags:
+                            @forelse($post->tags as $tag)
+                            <span class="badge badge-info">{{$tag->name}}</span>
+                            @empty
+                              -
+                            @endforelse
+                            
+                          </span>
+                          <div> 
+                            <a class="btn btn-primary m-1" href="{{ route('admin.posts.show', $post)}}">Show</a>
+                            <a class="btn btn-primary m-1" href="{{ route('admin.posts.edit', $post)}}">Edit</a>
+                            <form 
+                            class="d-inline"
+                            action="{{ route('admin.posts.destroy', $post)}}" 
+                            method="POST"
+                            onsubmit="return confirm('Sicuro di vole eliminare?')">
+                            @csrf
                           
-                        </div>
+                            @method('DELETE')
+                          
+                              <button class="btn btn-primary" type="submit"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+
+                          </div>
+                      </div>
                       </div>
                     </div>
                       
