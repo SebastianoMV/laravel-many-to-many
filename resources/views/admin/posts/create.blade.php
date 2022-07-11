@@ -32,6 +32,15 @@
                 <p class="error-msg">{{$message}}</p>
               @enderror
             </div>
+            <div class="form-group">
+              
+              @foreach($tags as $tag)
+              {{$tag->id}}
+              <input type="checkbox" name="tags[]" id="tag{{ $loop->iteration }}" value="{{ $tag->id }}">
+              <label for="tag{{ $loop->iteration }}" class="mr-3">{{ $tag->name }}</label>
+              @endforeach
+              
+            </div>
       
             <button type="submit" class="btn btn-primary my-1">Submit</button>
           </form>
