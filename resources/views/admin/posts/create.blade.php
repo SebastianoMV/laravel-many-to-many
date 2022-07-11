@@ -36,7 +36,8 @@
               
               @foreach($tags as $tag)
               {{$tag->id}}
-              <input type="checkbox" name="tags[]" id="tag{{ $loop->iteration }}" value="{{ $tag->id }}">
+              <input type="checkbox" name="tags[]" id="tag{{ $loop->iteration }}" value="{{ $tag->id }}"
+              @if(in_array($tag->id, old('tags',[]) ) ) checked @endif>
               <label for="tag{{ $loop->iteration }}" class="mr-3">{{ $tag->name }}</label>
               @endforeach
               
