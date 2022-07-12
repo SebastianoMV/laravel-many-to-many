@@ -93,14 +93,17 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $data = $request->all();
-        $data['slug'] = Post::newSlug($data['title']);
+
+        if($data['title'] != $post->title){
+            $data['slug'] = Post::newSlug($data['title']);
+        }
 
         $post->update($data);
 
         if(array_key_exists('tags', $data)){
             $post->tags()->sync($data['tags']);
         }else{
-            $post->tags()->sync([]);
+            $post->tags()->detach();
         }
 
         return redirect()->route('admin.posts.index', $post);
